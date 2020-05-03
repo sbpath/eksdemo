@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app1
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: java-app1
+  template:
+    metadata:
+      labels:
+        app: java-app1
+    spec:
+      containers:
+      - image: 692050956348.dkr.ecr.us-east-1.amazonaws.com/java-app1:latest
+        imagePullPolicy: Always
+        name: java-app1
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+
