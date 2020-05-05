@@ -3,14 +3,14 @@ provider "aws" {
 }
 
 locals {
-  cluster_name = "EKS-Suresh-Testing"
+  cluster_name = "EKS-Schneider-Testing"
 }
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.6.0"
 
-  name                 = "VPC-EKS-Suresh-Testing"
+  name                 = "${local.cluster_name}-VPC"
   cidr                 = "10.0.0.0/16"
   azs                  = ["us-east-1a", "us-east-1b", "us-east-1c"]
   private_subnets      = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
@@ -21,17 +21,17 @@ module "vpc" {
 
 
   tags = {
-    "Name"	= "EKS-Suresh-Testing"
+    "Name"	= local.cluster_name
   }
 
   public_subnet_tags = {
-    "Name" 	= "EKS-Suresh-Testing-Public"
+    "Name" 	= "${local.cluster_name}-Public"
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
     "kubernetes.io/role/elb"                      = "1"
   }
 
   private_subnet_tags = {
-    "Name"	= "EKS-Suresh-Testing-Private"
+    "Name"	= "${local.cluster_name}-Private"
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"             = "1"
   }

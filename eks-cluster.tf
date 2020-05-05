@@ -10,6 +10,7 @@ module "eks" {
     Environment = "training"
     GithubRepo  = "terraform-aws-eks"
     GithubOrg   = "terraform-aws-modules"
+    Name = local.cluster_name
   }
 
     node_groups = {
@@ -26,7 +27,7 @@ module "eks" {
         GithubOrg   = "terraform-aws-modules"
       }
       additional_tags = {
-        ExtraTag = "example"
+        Name = "${local.cluster_name}-nodegroup1"
       }
     }
   }

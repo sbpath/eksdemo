@@ -1,6 +1,6 @@
 resource "kubernetes_deployment" "nginx" {
   metadata {
-    name = "terraform-nginx"
+    name = "nginx"
     labels = {
       test = "nginx"
     }
@@ -24,9 +24,11 @@ resource "kubernetes_deployment" "nginx" {
 
       spec {
         container {
-          image = "nginx:1.7.8"
+          image = "nginx"
           name  = "nginx"
-
+          port {
+            container_port = "80"
+	  }
         }
       }
     }
@@ -43,7 +45,7 @@ resource "kubernetes_service" "nginx" {
       app = "nginx"
     }
     port {
-      port        = 8080
+      port        = 80
       target_port = 80
     }
 

@@ -1,6 +1,5 @@
-
-resource "aws_security_group" "SG-EKS-Suresh-Testing-public" {
-  name = "SG-EKS-Suresh-Testing-public"
+resource "aws_security_group" "securitygroup-public" {
+  name = "SG-${local.cluster_name}-Public"
   vpc_id      = module.vpc.vpc_id
 
 
@@ -24,7 +23,7 @@ resource "aws_security_group" "SG-EKS-Suresh-Testing-public" {
   }
 
   tags = { 
-    Name = "SG-EKS-Suresh-Testing-public"
+    Name = "SG-${local.cluster_name}-Public"
   }
 
 }
