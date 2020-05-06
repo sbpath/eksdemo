@@ -1,31 +1,26 @@
 resource "kubernetes_deployment" "nginx" {
   metadata {
-    name = "nginx"
-    labels = {
-      test = "nginx"
-    }
+    name = "my-nginx"
   }
-
   spec {
     replicas = 1
-
     selector {
       match_labels = {
-        test = "nginx"
+        run = "my-nginx"
       }
     }
 
     template {
       metadata {
         labels = {
-          test = "nginx"
+          run = "my-nginx"
         }
       }
 
       spec {
         container {
           image = "nginx"
-          name  = "nginx"
+          name  = "my-nginx"
           port {
             container_port = "80"
 	  }
@@ -38,17 +33,16 @@ resource "kubernetes_deployment" "nginx" {
 
 resource "kubernetes_service" "nginx" {
   metadata {
-    name = "terraform-nginx"
+    name = "my-nginx"
   }
   spec {
     selector = {
-      app = "nginx"
+      run = "my-nginx"
     }
     port {
       port        = 80
       target_port = 80
     }
-
     type = "LoadBalancer"
   }
 }
