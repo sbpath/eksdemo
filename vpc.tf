@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  cluster_name = "EKS-Schneider-Testing"
+  cluster_name = "EKS-Cluster-Testing"
 }
 
 module "vpc" {
