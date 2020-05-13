@@ -31,5 +31,5 @@ terraform apply
 
 To get kubeconfig for the cluster
 
-aws eks --region us-east-1 update-kubeconfig --name EKS-Schneider-Testing
+aws eks --region us-east-1 update-kubeconfig --name EKS-Cluster-Testing
 
